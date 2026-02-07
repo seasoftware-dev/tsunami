@@ -7,62 +7,71 @@ window {
 /* ===== HEADER BAR - Vibrant Blue Sea Theme ===== */
 headerbar.blue-titlebar {
     background-color: #2563eb !important;
-    background-image: linear-gradient(to bottom, #2563eb, #1e40af) !important;
-    border-bottom: 1px solid #1d4ed8 !important;
+    background-image: linear-gradient(to bottom, #3b82f6, #1d4ed8) !important;
+    border-bottom: 2px solid #1e3a8a !important;
     padding: 0 6px;
-    min-height: 42px;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    min-height: 44px;
+    color: white !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* All headerbar buttons */
+/* All header buttons */
 headerbar.blue-titlebar button {
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    padding: 6px;
-    margin: 0 2px;
-    transition: all 0.2s ease;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: white !important;
+    padding: 6px !important;
+    margin: 0 1px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 headerbar.blue-titlebar button:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) !important;
 }
 
 headerbar.blue-titlebar button:active {
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Window Control Buttons (Min, Max, Close) */
-headerbar.blue-titlebar .win-control-btn {
-    min-width: 32px;
-    min-height: 32px;
+.win-control-btn {
+    min-width: 42px;
+    min-height: 42px;
     border-radius: 0 !important;
-    padding: 4px !important;
+    padding: 8px !important;
     margin: 0 !important;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: white !important;
 }
 
-headerbar.blue-titlebar .win-control-btn:hover {
-    background: rgba(255, 255, 255, 0.1) !important;
+.win-control-btn:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
     opacity: 1;
 }
 
-headerbar.blue-titlebar .win-control-btn.close-btn:hover {
+.win-control-btn.close-btn:hover {
     background: #ef4444 !important;
 }
 
-/* URL Entry - Frosted Glass Look */
+/* URL Entry - Premium Search Bar Look */
 headerbar.blue-titlebar entry {
-    background-color: rgba(15, 23, 42, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    color: #fff;
-    padding: 4px 12px;
-    font-size: 13px;
-    min-height: 28px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: rgba(15, 23, 42, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    padding: 6px 14px !important;
+    font-size: 13.5px !important;
+    min-height: 30px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.2s ease;
+}
+
+headerbar.blue-titlebar entry:focus {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.4) !important;
 }
 
 entry:focus {

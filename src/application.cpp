@@ -98,34 +98,40 @@ void Application::on_startup(GApplication*, gpointer) {
     }
 
     // Load custom CSS theme
+    const char* fallback_css = 
+        ".sea-header { background: #2563eb; background-image: linear-gradient(to bottom, #2563eb, #1e40af); border-bottom: 2px solid #1d4ed8; padding: 4px; min-height: 42px; color: white; }"
+        ".win-control-btn { min-width: 32px; min-height: 32px; border-radius: 0; padding: 4px; opacity: 0.8; }"
+        ".win-control-btn:hover { background: rgba(255,255,255,0.1); opacity: 1; }"
+        ".win-control-btn.close-btn:hover { background: #ef4444; }"
+        "entry { background: rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; padding: 4px; }";
+
     std::string css_path = find_resource("style.css");
+    auto provider = gtk_css_provider_new();
+    GError* error = nullptr;
+
     if (!css_path.empty()) {
-        std::cout << "[SeaBrowser] Definitive CSS search found: " << css_path << std::endl;
-        
-        auto provider = gtk_css_provider_new();
-        GError* error = nullptr;
-        // Force path-based loading to avoid memory-only issues
+        std::cout << "[SeaBrowser] CSS path found: " << css_path << std::endl;
         gtk_css_provider_load_from_path(provider, css_path.c_str(), &error);
-        
-        if (error) {
-            std::cerr << "[SeaBrowser] ERROR: CSS failed to parse! " << error->message << std::endl;
-            g_error_free(error);
-        } else {
-            auto display = gdk_display_get_default();
-            auto screen = gdk_display_get_default_screen(display);
-            gtk_style_context_add_provider_for_screen(
-                screen,
-                GTK_STYLE_PROVIDER(provider),
-                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
-            );
-            
-            // Also store it for direct window application if needed
-            g_object_set_data_full(G_OBJECT(display), "sea-css-provider", provider, g_object_unref);
-            std::cout << "[SeaBrowser] CSS loaded successfully" << std::endl;
-        }
     } else {
-        std::cerr << "[SeaBrowser] WARNING: Could not find style.css!" << std::endl;
+        std::cerr << "[SeaBrowser] WARNING: style.css not found, using fallback" << std::endl;
+        gtk_css_provider_load_from_data(provider, fallback_css, -1, &error);
     }
+
+    if (error) {
+        std::cerr << "[SeaBrowser] ERROR: CSS error: " << error->message << " (using fallback)" << std::endl;
+        g_error_free(error);
+        gtk_css_provider_load_from_data(provider, fallback_css, -1, nullptr);
+    }
+
+    auto display = gdk_display_get_default();
+    auto screen = gdk_display_get_default_screen(display);
+    gtk_style_context_add_provider_for_screen(
+        screen,
+        GTK_STYLE_PROVIDER(provider),
+        GTK_STYLE_PROVIDER_PRIORITY_USER // Use high priority to override system themes
+    );
+    g_object_set_data_full(G_OBJECT(display), "sea-css-provider", provider, g_object_unref);
+    std::cout << "[SeaBrowser] CSS theme initialized" << std::endl;
     
     // Initialize settings
     SettingsManager::instance().load(get_config_dir());
