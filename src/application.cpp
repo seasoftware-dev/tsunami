@@ -79,8 +79,7 @@ int Application::run(int argc, char* argv[]) {
     BrowserWindow window;
     window.show();
     
-    int result = app.exec();
-    return result;
+    return app.exec();
 }
 
 QString Application::get_config_dir() {
