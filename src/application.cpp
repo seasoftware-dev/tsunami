@@ -70,7 +70,7 @@ int Application::run(int argc, char* argv[]) {
         // Show onboarding/setup page
         BrowserWindow onboardingWindow;
         onboardingWindow.show();
-        onboardingWindow.loadUrl(QUrl::fromLocalFile(find_resource("pages/setup.html")));
+        onboardingWindow.loadUrl(QUrl::fromLocalFile(find_resource("pages/newtab.html")));
         app.processEvents();
         return app.exec();
     }
