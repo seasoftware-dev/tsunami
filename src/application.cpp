@@ -68,9 +68,9 @@ int Application::run(int argc, char* argv[]) {
     auto& settings = Settings::instance();
     if (settings.isFirstRun()) {
         // Show onboarding/setup page
-        BrowserWindow onboardingWindow;
-        onboardingWindow.show();
-        onboardingWindow.loadUrl(QUrl::fromLocalFile(find_resource("pages/newtab.html")));
+        BrowserWindow browserWindow;
+        browserWindow.show();
+        browserWindow.loadUrl(QUrl::fromLocalFile(find_resource("pages/newtab.html")));
         app.processEvents();
         return app.exec();
     }
