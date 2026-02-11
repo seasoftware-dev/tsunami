@@ -69,29 +69,38 @@ void WebView::setupPage(QWebEnginePage* page) {
     // Add Qt bridge for JavaScript
     static SettingsBridge* bridge = new SettingsBridge();
     QWebChannel* channel = new QWebChannel(page);
-    channel->registerObject("tunami", bridge);
+    channel->registerObject("tsunami", bridge);
     page->setWebChannel(channel);
     
     // Inject JavaScript bridge
     QString jsBridge = R"(
         (function() {
-            if (window.tunami) return;
-            window.tunami = {
+            // Prefer the correctly spelled 'tsunami' namespace, but keep 'tunami' as a backwards-compatible alias.
+            if (window.tsunami) {
+                if (!window.tunami) {
+                    window.tunami = window.tsunami;
+                }
+                return;
+            }
+            window.tsunami = {
                 getSettings: function() {
-                    if (window.tunami._settings) return window.tunami._settings;
+                    if (window.tsunami._settings) return window.tsunami._settings;
                     var xhr = new XMLHttpRequest();
                     xhr.open('GET', 'qt://channel', false);
                     xhr.send();
                     try {
-                        window.tunami._settings = JSON.parse(xhr.responseText);
+                        window.tsunami._settings = JSON.parse(xhr.responseText);
                     } catch(e) {
-                        window.tunami._settings = {};
+                        window.tsunami._settings = {};
                     }
-                    return window.tunami._settings;
+                    return window.tsunami._settings;
                 },
                 getSetting: function(key) {
-                    if (window.tunami._settings && window.tunami._settings.hasOwnProperty(key)) {
-                        return window.tunami._settings[key];
+                    if (window.tsunami._settings && window.tsunami._settings.hasOwnProperty(key)) {
+                        return window.tsunami._settings[key];
+            if (!window.tunami) {
+                window.tunami = window.tsunami;
+            }
                     }
                     var xhr = new XMLHttpRequest();
                     xhr.open('GET', 'qt://getSetting/' + key, false);
