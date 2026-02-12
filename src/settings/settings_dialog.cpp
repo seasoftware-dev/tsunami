@@ -20,13 +20,13 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle("Settings - Tsunami");
-    setMinimumSize(700, 850);
-    resize(750, 900);
+    setMinimumSize(850, 500);
+    resize(900, 550);
     setModal(true);
     
     bool isDark = Settings::instance().getDarkMode();
     
-    QString bgColor = isDark ? "#0f172a" : "#b8e0ff";
+    QString bgColor = isDark ? "#0f172a" : "#ffffff";
     QString textColor = isDark ? "#e2e8f0" : "#1e293b";
     QString inputBg = isDark ? "#1e293b" : "#ffffff";
     QString borderColor = isDark ? "#334155" : "#cbd5e1";
