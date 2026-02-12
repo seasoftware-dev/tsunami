@@ -20,7 +20,8 @@ SettingsDialog::SettingsDialog(QWidget* parent)
     : QDialog(parent)
 {
     setWindowTitle("Settings - Tsunami");
-    setMinimumSize(850, 500);
+    setMinimumSize(900, 550);
+    setMaximumSize(900, 550);
     resize(900, 550);
     setModal(true);
     
