@@ -19,12 +19,12 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
       with:
-        version: '6.8.3'
+        version: '6.7.0'
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2022_64'
-        modules: 'qtdeclarative qtwebengine'
-        cache: 'true'
+        modules: 'qtwebengine'
+        cache: 'false'
 
     - name: Install Visual Studio Build Tools
       run: |

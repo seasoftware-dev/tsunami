@@ -146,7 +146,6 @@ void WebView::setupPage(QWebEnginePage* page) {
     
     page->scripts().insert(script);
 }
-
 } // namespace Tsunami
 
 #include "web_view.moc"
