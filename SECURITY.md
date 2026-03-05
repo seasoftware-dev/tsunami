@@ -62,7 +62,6 @@ Tsunami Browser is committed to user privacy:
 - All settings stored locally
 - No connection to external servers except as initiated by the user
 
-See our [Privacy Policy](https://tsunami.io/privacy) for more details.
 
 ## Related Documentation
 
