@@ -23,7 +23,7 @@ jobs:
         host: 'windows'
         target: 'desktop'
         arch: 'win64_msvc2022_64'
-        modules: 'qtwebengine'
+        modules: 'qtdeclarative qtwebengine'
         cache: 'true'
 
     - name: Install Visual Studio Build Tools
